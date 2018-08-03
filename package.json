@@ -1,0 +1,47 @@
+{
+  "name": "lora-network-connector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "chai-json-schema-ajv": "^2.0.0",
+    "ioredis": "^3.2.2",
+    "kafka-node": "^2.3.1",
+    "moment": "^2.20.1",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.3",
+    "node-aes-cmac": "^0.1.1",
+    "sequelize": "^4.37.6",
+    "winston": "^3.0.0-rc1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "jscs": "^3.0.7",
+    "jshint": "^2.9.5",
+    "mocha": "^4.1.0",
+    "pre-commit": "^1.2.2"
+  },
+  "scripts": {
+    "test": "mocha --recursive",
+    "lint": "files=$(git diff --cached --name-only --diff-filter=ACM | grep '\\.js$'); node_modules/.bin/jshint $files && node_modules/.bin/jscs $files"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xisiot/lora-network-connector"
+  },
+  "keywords": [
+    "connector"
+  ],
+  "pre-commit": [
+    "test",
+    "lint"
+  ],
+  "author": "xisiot Co., Ltd.",
+  "license": "ISC"
+}
