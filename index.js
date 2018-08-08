@@ -30,7 +30,7 @@ const joinHandler = new JoinHandler(modelIns.MySQLModel.DeviceInfo, log);
 const udpServer = new UDPServer(log);
 const phyHandler = new PHYHandler(modelIns.MySQLModel, joinHandler, log);
 const udpHandler = new UDPHandler(log, phyHandler);
-const mqClient = new MQClient(config.mqClient, log);
+const mqClient = new MQClient(config.mqClient_nc, log);
 const gatewayHandler = new GatewayHandler(modelIns, log, mqClient);
 
 mqClient.connect()
@@ -78,7 +78,7 @@ mqClient.connect()
                 });
             } else {
               log.info(udpUlJSON);
-              return mqClient.publish(config.mqClient.topics.pubToServer, udpUlJSON);
+              return mqClient.publish(config.mqClient_nc.topics.pubToServer, udpUlJSON);
             }
 
           })

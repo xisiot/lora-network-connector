@@ -31,7 +31,7 @@
     "level": "debug",
     "colorize": true
   },
-  "mqClient": {
+  "mqClient_nc": {
     "consumerGroup": {
       "options": {
         "kafkaHost": "127.0.0.1:9092",
