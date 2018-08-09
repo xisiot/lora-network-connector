@@ -17,12 +17,12 @@ const modelIns = {
   RedisModel: {},
   MySQLModel: {},
 };
-for (let model in Models.RedisModel) {
-  modelIns.RedisModel[model] = new Models.RedisModel[model](db.RedisClient);
+for (let model in Models.RedisModels) {
+  modelIns.RedisModel[model] = new Models.RedisModels[model](db.RedisClient);
 }
 
-for (let model in Models.MySQLModel) {
-  modelIns.MySQLModel[model] = new Models.MySQLModel[model](db.MySQLClient);
+for (let model in Models.MySQLModels) {
+  modelIns.MySQLModel[model] = new Models.MySQLModels[model](db.MySQLClient);
 }
 
 const log = new Log(config.log);

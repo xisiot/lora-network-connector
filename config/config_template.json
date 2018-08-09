@@ -46,7 +46,7 @@
         "fromOffset": "lates"
       },
       "topics": [
-        "NC-su"
+        "NC-sub"
       ]
     },
     "client": {
@@ -59,7 +59,7 @@
       "partitionerType": 2
     },
     "topics": {
-      "pubToServer": "NS-su"
+      "pubToServer": "NS-sub"
     }
   },
   "udp": {
