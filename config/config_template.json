@@ -1,16 +1,9 @@
 {
   "database": {
-    "redis": {
-      "cluster": false,
-      "options": [{
-        "host": "localhost",
-        "port": 6379
-      }]
-    },
     "mysql": {
       "username": "username",
       "password": "password",
-      "database": "database",
+      "database": "mysql",
       "host": "localhost",
       "port": 3306,
       "dialect": "mysql",
@@ -22,10 +15,20 @@
         "timestamp": true,
         "charset": "utf8"
       }
+    },
+    "redis": {
+      "cluster": false,
+      "options": [
+        {
+          "host": "localhost",
+          "port": 6379
+        }
+      ]
     }
   },
   "mocha": {
-    "timeout": 5000
+    "timeout": 5000,
+    "longTimeOut": 15000
   },
   "log": {
     "level": "debug",
@@ -34,19 +37,21 @@
   "mqClient_nc": {
     "consumerGroup": {
       "options": {
-        "kafkaHost": "127.0.0.1:9092",
+        "kafkaHost": "localhost:9092",
         "groupId": "lora-network-connector-consumer",
         "sessionTimeout": 15000,
-        "protocol": ["roundrobin"],
-        "fromOffset": "latest"
+        "protocol": [
+          "roundrobin"
+        ],
+        "fromOffset": "lates"
       },
       "topics": [
-        "NC-sub"
+        "NC-su"
       ]
     },
     "client": {
-      "kafkaHost": "127.0.0.1:9092",
-      "clientId": "lora-network-connector-producer"
+      "kafkaHost": "localhost:9092",
+      "clientId": "lora-network-connector-produce"
     },
     "producer": {
       "requireAcks": 1,
@@ -54,7 +59,7 @@
       "partitionerType": 2
     },
     "topics": {
-      "pubToServer": "NS-sub"
+      "pubToServer": "NS-su"
     }
   },
   "udp": {
