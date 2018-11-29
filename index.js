@@ -28,7 +28,7 @@ for (let model in Models.MySQLModels) {
 const log = new Log(config.log);
 const joinHandler = new JoinHandler(modelIns.MySQLModel.DeviceInfo, log);
 const udpServer = new UDPServer(log);
-const phyHandler = new PHYHandler(modelIns.RedisModel, joinHandler, log);
+const phyHandler = new PHYHandler(modelIns, joinHandler, log);
 const udpHandler = new UDPHandler(log, phyHandler);
 const mqClient = new MQClient(config.mqClient_nc, log);
 const gatewayHandler = new GatewayHandler(modelIns, log, mqClient);
