@@ -74,6 +74,7 @@ mqClient.connect()
             if (udpUlJSON.pushData) {
               return udpHandler.pushDataParser(udpUlJSON)
                 .then((pushData) => {
+                  console.log(pushData);
                   return gatewayHandler.uploadPushData(pushData);
                 });
             } else {

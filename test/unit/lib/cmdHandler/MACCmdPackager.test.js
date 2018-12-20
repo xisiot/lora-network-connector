@@ -30,6 +30,7 @@ const maccommand = '01010245670389abcdef';
 describe('Test MACCmd Packager', () => {
   it('test packager', () => {
     const res = macCmdPackager.packager(cmdArr);
+    console.log(res);
     expect(res.toString('hex')).to.equal(maccommand);
   });
 });

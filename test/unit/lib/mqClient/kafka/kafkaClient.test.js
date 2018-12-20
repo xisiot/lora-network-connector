@@ -47,14 +47,15 @@ describe('Test MQ client', () => {
     const len = 10;
     const message = crypto.randomBytes(len).toString('hex');
 
-    mqClient.connect()
+    return mqClient.connect()
       .then(() => {
         mqClient.message((res) => {
           expect(res.value).to.equal(message);
           done();
         });
-        mqClient.publish(topic, message);
-      });
+        return mqClient.publish(topic, message);
+      })
+      .then(() => done(), done);
   }).timeout(config.mocha.timeout);
   after('Close MQ client', (done) => {
     mqClient.disconnect()

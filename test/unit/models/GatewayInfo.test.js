@@ -37,8 +37,8 @@ describe('Test GatewayInfo model', function () {
   let testMySQLGatewayInfo;
   const testUser = 'testUser';
   before('Get connection with database', function (done) {
-    GatewayInfoRedis = new Models.RedisModel.GatewayInfo(_ioredis);
-    GatewayInfoMySQL = new Models.MySQLModel.GatewayInfo(_sequelize);
+    GatewayInfoRedis = new Models.RedisModels.GatewayInfo(_ioredis);
+    GatewayInfoMySQL = new Models.MySQLModels.GatewayInfo(_sequelize);
     query = {
       gatewayId: testGatewayId,
     };

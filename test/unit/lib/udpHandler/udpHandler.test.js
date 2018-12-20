@@ -25,7 +25,7 @@ describe('Test UDP parser', () => {
   let udpErrorIdentifier;
   before('Initial a handler', () => {
     udpHandler = new UDPHandler(log);
-    const udpEUI = crypto.randomBytes(consts.GW_ID_LEN);
+    const udpEUI = crypto.randomBytes(consts.GWEUI_LEN);
     const baseLen = 4;
     const base = Buffer.alloc(baseLen);
     base.writeUIntBE(0x02000000, 0, baseLen);
@@ -153,7 +153,7 @@ describe('Test UDP packager', (done) => {
   it('PULL_ACK', (done) => {
     udpPULLACKJSON = Object.assign({}, udpBaseJSON);
     udpPULLACKJSON.identifier.writeUInt8(consts.UDP_ID_PULL_ACK);
-    udpPULLACKJSON.gatewayId = Buffer.alloc(consts.GW_ID_LEN);
+    udpPULLACKJSON.gatewayId = Buffer.alloc(consts.GWEUI_LEN);
     udpHandler.packager(udpPULLACKJSON)
     .then((udpRecPULLACK) => {
       expect(udpRecPULLACK.equals(udpPULLACK)).to.be.true;

@@ -21,16 +21,16 @@ const modelIns = {
   RedisModel: {},
   MySQLModel: {},
 };
-for (let model in Models.RedisModel) {
-  modelIns.RedisModel[model] = new Models.RedisModel[model](db.RedisClient);
+for (let model in Models.RedisModels) {
+  modelIns.RedisModel[model] = new Models.RedisModels[model](db.RedisClient);
 }
 
-for (let model in Models.MySQLModel) {
-  modelIns.MySQLModel[model] = new Models.MySQLModel[model](db.MySQLClient);
+for (let model in Models.MySQLModels) {
+  modelIns.MySQLModel[model] = new Models.MySQLModels[model](db.MySQLClient);
 }
 
 const PhyPackager = require(join('lib/phyHandler/phyPackager'));
-const phyPackager = new PhyPackager(modelIns.MySQLModel.DeviceInfo, null, log);
+const phyPackager = new PhyPackager(modelIns.RedisModel.DeviceInfo, null, log);
 
 describe('Test PHY packager', () => {
 
@@ -41,7 +41,7 @@ describe('Test PHY packager', () => {
       ADR: 0,
       ACK: 1,
       FPending: 0,
-      FOptsLen: 1,
+      FOptsLen: 5,
     };
 
   });
@@ -57,7 +57,7 @@ describe('Test PHY packager', () => {
   });
 
   it('Test FCtrl packager', () => {
-    const expectedFCtrl = Buffer.from('21', 'hex');
+    const expectedFCtrl = Buffer.from('25', 'hex');
     FCtrl = PhyPackager.FCtrlPackager(FCtrlJSON);
     expect(FCtrl.equals(expectedFCtrl)).to.be.true;
   });
@@ -67,15 +67,23 @@ describe('Test PHY packager', () => {
       DevAddr: crypto.randomBytes(consts.DEVADDR_LEN),
       FCtrl: FCtrlJSON,
       FCnt: crypto.randomBytes(consts.FCNT_LEN),
-      FOpts: crypto.randomBytes(FCtrlJSON.FOptsLen),
+      FOpts: [{ 
+        '03': { 
+          TXPower: Buffer.from('01', 'hex'),
+          ChMask: Buffer.from('00ff', 'hex'),
+          Redundancy: Buffer.from('02', 'hex'),
+        },
+      }],
     };
     const expectedFHDR = Buffer.concat([
       reverse(FHDRJSON.DevAddr),
       reverse(FCtrl),
       reverse(FHDRJSON.FCnt.slice(consts.FCNT_LEAST_OFFSET)),
-      reverse(FHDRJSON.FOpts),
+      Buffer.from('030100ff02', 'hex'),
     ]);
     const FHDR = PhyPackager.FHDRPackager(FHDRJSON);
+    console.log(FHDR);
+    console.log(expectedFHDR);
     expect(FHDR.equals(expectedFHDR)).to.be.true;
 
   });
