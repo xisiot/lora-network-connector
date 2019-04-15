@@ -33,8 +33,8 @@ const udpHandler = new UDPHandler(log, phyHandler);
 const mqClient = new MQClient(config.mqClient_nc, log);
 const gatewayHandler = new GatewayHandler(modelIns, log, mqClient);
 
-mqClient.connect()
-  .then(() => {
+//mqClient.connect()
+  //.then(() => {
     //Uplink
     udpServer.bind(config.udp, () => {
       udpServer.recv((message, udpInfo) => {
@@ -79,7 +79,7 @@ mqClient.connect()
                 });
             } else {
               log.info(udpUlJSON);
-              return mqClient.publish(config.mqClient_nc.topics.pubToServer, udpUlJSON);
+              //return mqClient.publish(config.mqClient_nc.topics.pubToServer, udpUlJSON);
             }
 
           })
@@ -150,11 +150,11 @@ mqClient.connect()
       });
       return bluebird.resolve();
     });
-  })
-  .catch((error) => {
+  //})
+  //.catch((error) => {
     //FATAL ERROR
-    log.error(error.stack);
-    mqClient.disconnect();
-    udpServer.destructor();
-  });
+    //log.error(error.stack);
+    //mqClient.disconnect();
+   // udpServer.destructor();
+ // });
 
