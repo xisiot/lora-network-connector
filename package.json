@@ -12,7 +12,7 @@
     "chai-json-schema-ajv": "^2.0.0",
     "ioredis": "^3.2.2",
     "kafka-node": "^2.3.1",
-    "moment": "^2.20.1",
+    "moment": "^2.29.2",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
     "node-aes-cmac": "^0.1.1",
